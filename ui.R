@@ -1,3 +1,4 @@
+library('shiny')
 # working directory commented out for shiny app publication
 #setwd("~/INFO201/a8-building-apps-christiegan/")
 

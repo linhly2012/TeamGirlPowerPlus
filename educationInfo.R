@@ -12,9 +12,11 @@ library('readxl')
 
 #for the year of 2014 - data will be using is 2013 - 2014
 grad_rates_13_14 <- read.csv('./data/education-grad-rate-revised-data-2013-2014.csv')
+View(grad_rates_13_14)
 
 #for the year of 2013 - data will be using is 2012 - 2013
 grad_rates_12_13 <- read.csv('./data/education-grad-rates-revised-2012-2013.csv')
+View(grad_rates_12_13)
 
 #reading in crimerates data 
 crime_rates <- read.csv('./data/CrimeStateByState_Clean.csv')
@@ -48,5 +50,6 @@ FilterDfYear <- function (year) {
 #because in 2012-2013 school year, Idoho about graduation rate 
 #data is not available.
 JoinedCrimeAndEd2013 <- FilterDfYear(2013)
+View(JoinedCrimeAndEd2013)
 JoinedCrimeAndEd2014 <- FilterDfYear(2014)
-
+View(JoinedCrimeAndEd2014)
