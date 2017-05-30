@@ -10,7 +10,7 @@ shinyUI(fluidPage(
     
     sidebarPanel( 
       # allows user to select a type of crime in the US
-      selectInput("crime", label = "Crime Type", choices = tail(crime.dataset, length(list.of.nutrition)-8)),
+      selectInput("crime", label = "Crime Type", choices = tail(crime.dataset, length(crime.dataset)-8)),
     
       # allows user to select a type of student
       selectInput("student type", label = "Student Demographic", choices = tail(list.of.nutrition, 
