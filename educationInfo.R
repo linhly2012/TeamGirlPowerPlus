@@ -4,15 +4,31 @@ library('readxl')
 #set working directory
 setwd("/Users/linhly/Desktop/INFO/TeamGirlPowerPlusOne")
 
-#value is go by percen of students 
+#value is go by percent of students 
 #the data has been clean in a readable format through Google Drive excel 
 #all the value in the data infomration go by "PERCENT OF STUDENT" for each 
 #variable
-data_graduation_rates <- read.csv('./data/education-grad-rate-revised-data.csv')
+#reading the graduation rate of HS students in each state 
+grad_rates_df <- read.csv('./data/education-grad-rate-revised-data.csv')
 
+#reading in crimerates data 
 crime_rates <- read.csv('./data/CrimeStateByState_Clean.csv')
 
-test_join_data_CA_ed <- data_graduation_rates %>% filter(State == 'California')
-test_join_data_CA_crime <- crime_rates %>% filter(State == 'California' , (Year == 2013 | Year == 2014))
+#new location to store the file in states level by year
+dir.create('States Level Data')
 
-join_data <- merge(x=test_join_data_CA_ed , y=test_join_data_CA_crime, by='State')
+#use function to filter down the crime rates df to interest year. 
+#looking into to two df, due to two differen years 2013 and 2014
+FilterDfYear <- function (year) {
+  df_state_crime_year <- crime_rates %>% filter(Year == year)
+  df <- merge(x=df_state_crime_year, y=grad_rates_df, by='State')
+  
+  path <- paste0('./States Level Data/Crime And Education Rate', year, '-StatesLevel.csv')
+  #to csv file for each year 
+  write.csv(df, file=path)
+  return(df)
+}
+
+JoinedCrimeAndEd2013 <- FilterDfYear(2013)
+JoinedCrimeAndEd2014 <- FilterDfYear(2014)
+
