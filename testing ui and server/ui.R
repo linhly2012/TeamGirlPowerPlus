@@ -3,6 +3,7 @@ library(dplyr)
 # working directory commented out for shiny app publication
 #setwd("/Users/shjang1025/Desktop/info/TeamGirlPowerPlusOne/testing ui and server/")
 
+setwd("/Users/linhly/Desktop/INFO/TeamGirlPowerPlusOne/testing ui and server")
 #load data
 CAER2013 <- read.csv("Crime And Education Rate2013-StatesLevel.csv")
 CAER2014 <- read.csv("Crime And Education Rate2014-StatesLevel.csv")
