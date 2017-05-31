@@ -1,3 +1,10 @@
+#shiny dashboard 
+#https://rstudio.github.io/shinydashboard/get_started.html
+#condition Panel 
+#https://shiny.rstudio.com/reference/shiny/latest/conditionalPanel.html
+#install.packages('shinydashboard')
+
+library(shinydashboard)
 library(shiny)
 library(dplyr)
 library(googleVis)
@@ -7,7 +14,7 @@ setwd("/Users/linhly/Desktop/INFO/TeamGirlPowerPlusOne/")
 df_2014 <- read.csv('./States Level Data/Crime And Education Rate2014-StatesLevel.csv')
 df_2013 <- read.csv('./States Level Data/Crime And Education Rate2013-StatesLevel.csv')
 
-function(input, output) {
+server <- function(input, output) {
   #render the whole map
   output$view <- renderGvis({
     
@@ -36,9 +43,8 @@ function(input, output) {
                                            displayMode="regions",
                                            resolution="provinces",
                                            colors="['#4286f4']",
-                                           width=700, 
+                                           width= 600, 
                                            heigh = 400))
-    
   })
   
   #render the table information
@@ -52,8 +58,31 @@ function(input, output) {
       data.frame(df, check.names=FALSE)      
     }
     else {
-      tmp <- df %>% filter(State == input$table_state)
+      if(input$table_year == 2013) {
+        tmp <- df_2013 %>% filter(State == input$table_state)
+      }
+      else if(input$table_year == 2014) {
+        tmp <- df_2014 %>% filter(State == input$table_state)
+      }
+      else if(input$table_year == 'Both') {
+        tmp <- rbind(x=df_2013 %>% filter(State == input$table_state),
+                     y=df_2014 %>% filter(State == input$table_state))
+      }
+      #clean up the df - remove unneccessary columns
+      tmp <- data.frame(tmp[2], tmp[4:15])
+      #rename
+      tmp <- plyr::rename(tmp, c("Violent.Crime.rate" = "Violent Crime Rate", 
+                               "Murder.and.nonnegligent.manslaughter.rate" = "Murder & Nonnegligent Manslaughter Rate",
+                               "Legacy.rape.rate..1" = "Legacy Rape Rate",
+                               "Revised.rape.rate..2" = "Revised Rape Rate",
+                               "Robbery.rate" = "Robbery Rate",
+                               "Aggravated.assault.rate" = "Aggravated Assault Rate",
+                               "Economically.disadvantaged" = "Economically Disadvantaged",
+                               "Limited.English.proficiency" = "Limited English Proficiency",
+                               "Students.with.disabilities" = "Students With Disabilities"))
       data.frame(tmp, check.names = FALSE)
     }
+
   })
 }
+

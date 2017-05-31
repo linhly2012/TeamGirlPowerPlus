@@ -36,6 +36,17 @@ FilterDfYear <- function (year) {
     df <- merge(x=df_state_crime_year, y=grad_rates_13_14, by='State')    
   }
   
+  #rename
+  df <- plyr::rename(df, c("Violent.Crime.rate" = "Violent Crime Rate", 
+                           "Murder.and.nonnegligent.manslaughter.rate" = "Murder & Nonnegligent Manslaughter Rate",
+                           "Legacy.rape.rate..1" = "Legacy Rape Rate",
+                           "Revised.rape.rate..2" = "Revised Rape Rate",
+                           "Robbery.rate" = "Robbery Rate",
+                           "Aggravated.assault.rate" = "Aggravated Assault Rate",
+                           "Economically.disadvantaged" = "Economically Disadvantaged",
+                           "Limited.English.proficiency" = "Limited English Proficiency",
+                           "Students.with.disabilities" = "Students With Disabilities"))
+  
   path <- paste0('./States Level Data/Crime And Education Rate', year, '-StatesLevel.csv')
   #to csv file for each year 
   write.csv(df, file=path)

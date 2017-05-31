@@ -1,33 +1,30 @@
 library(markdown) 
+library(ggplot2)
+#documentation for split layout 
+#https://shiny.rstudio.com/reference/shiny/latest/splitLayout.html
 
-navbarPage("Welcome",
+navbarPage("Welcome CBCAER",
   
    tabPanel("Map",
-            mainPanel(
-                fluidRow(column(12, offset=3,h1("Graduation Rate in the US, 2014"))),
-                #h1("Graduation Rate in the US, 2014", align= "center"),
-                htmlOutput("view")
-              )
-            ), 
-   
-   tabPanel("Plot",
             sidebarPanel(
-              selectInput(inputId = "state", 
-                          label = "States: ", 
-                          choices = df$State %>% as.vector()
+              selectInput(inputId = "year", 
+                          label = "Year ", 
+                          choices = c("2013", "2014"),
+                          selected = "2013"
               )
             ),
-            #display the scatter plot pannel
             mainPanel(
-              plotOutput("plot")
+                h2("Correlation Between Crime and Education Rate"),
+                htmlOutput("view")
             )
-   ),
-   
+   ), 
+
    tabPanel("Table",
-            titlePanel("Correlation Between Crime and Education in 2014"),
+            fluidRow(column(12, offset=2,
+                            h1("Correlation between Crime & HS Graduation in 2014"))),
             sidebarPanel(
               selectInput(inputId = "table_state", 
-                          label = "States: ", 
+                          label = "State : ", 
                           choices = c("All", df$State %>% as.list()),
                           selected = "All"
               )
@@ -38,10 +35,7 @@ navbarPage("Welcome",
 
 #plot a map with each county name inside the state
 #map.text("county", "wash")
-
 #graphing a single state 
-# m <- map_data('state', region='Washington')
-# p <- ggplot() + 
-#    geom_polygon( data=m, aes(x=long, y=lat, group=group),colour="black", fill="white") + 
-#    geom_text() + ggtitle("Washington") 
-
+#m <- map_data('state', region='Washington')#
+#ggplot() + 
+#    geom_polygon(data=m, aes(x=long, y=lat, group=group),colour="black", fill="white")
