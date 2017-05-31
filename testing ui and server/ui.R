@@ -40,7 +40,7 @@ shinyUI(fluidPage(
       radioButtons("color", 
                    label = "Color:", 
                    choices = c("Orange" = "orange", 
-                               "Green" = "green", 
+                               "Purple" = "purple", 
                                "Pink" = "pink", 
                                "Black" = "black")),
     br(),
