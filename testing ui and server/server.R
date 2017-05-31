@@ -7,7 +7,7 @@ library(dplyr)
 #set working directory
 #setwd("/Users/shjang1025/Desktop/info/TeamGirlPowerPlusOne/testing ui and server/")
 
-setwd("/Users/linhly/Desktop/INFO/TeamGirlPowerPlusOne/testing ui and server")
+#setwd("/Users/linhly/Desktop/INFO/TeamGirlPowerPlusOne/testing ui and server")
 
 # Define the data that is shown based on your inputs defined in the UI
 # and turn it into an output plot
