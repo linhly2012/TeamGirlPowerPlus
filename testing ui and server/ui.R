@@ -25,7 +25,7 @@ shinyUI(fluidPage(
       # allows user to select a type of crime in the US
       selectInput(inputId = "crime", 
                   label = "Crime Type", 
-                  choices = colnames(CAER[,6:11])),
+                  choices = colnames(CAER2014[,6:11])),
       
       # allows user to select a year
       selectInput(inputId = "year",
@@ -35,7 +35,7 @@ shinyUI(fluidPage(
       # allows user to select a type of student
       selectInput(inputId = "student type", 
                   label = "Education:", 
-                  choices = colnames(CAER[,13:15])),
+                  choices = colnames(CAER2014[,13:15])),
       
       # allows user to select a color from a list of choices
       radioButtons("color", 
