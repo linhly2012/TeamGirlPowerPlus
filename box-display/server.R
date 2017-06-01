@@ -71,12 +71,13 @@ server <- function(input, output) {
     #clean up the df.data - remove unneccessary columns
     tmp <- data.frame(tmp[2], tmp[4:15])
     #rename
-    tmp <- select(tmp, State, Violent.Crime.Rate, Murder...Nonnegligent.Manslaughter.Rate, Revised.Rape.Rate, 
+    tmp <- select(tmp, State, Year, Violent.Crime.Rate, Murder...Nonnegligent.Manslaughter.Rate, Revised.Rape.Rate, 
                   Robbery.Rate, Aggravated.Assault.Rate, Total, Economically.Disadvantaged, 
-                  Limited.English.Proficiency, Students.With.Disabilities)
-    colnames(tmp) <- c("State", "Violent Crime Rate", "Murder/Nonegligent manslaugter Rate", "Rape Rate", "Robbery Rate", 
-                       "Aggravated Assault Rate", "Total", "Economically Disadvantaged Rate", "Limited English Proficiency Rate",
-                       "Student Disability Rate")
+                  Limited.English.Proficiency, Students.With.Disabilities) %>% 
+            mutate(Violent.Crime.Graduation.Ratio = Violent.Crime.Rate / Total)
+    colnames(tmp) <- c("State", "Year", "Violent Crime Rate", "Murder/Nonegligent manslaugter Rate", "Rape Rate", "Robbery Rate", 
+                       "Aggravated Assault Rate", "Graduation Rate", "Economically Disadvantaged Rate", "Limited English Proficiency Rate",
+                       "Student Disability Rate", "Violent Crime/Graduation Ratio")
     data.frame(tmp, check.names = FALSE)
   })
 }
