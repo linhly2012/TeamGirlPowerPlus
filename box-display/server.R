@@ -13,9 +13,15 @@ library(magrittr)
 library(plotly)
 library(knitr)
 # setwd("C:/Users/zacht/Documents/info-201/final-project/TeamGirlPowerPlusOne/box-display")
+<<<<<<< HEAD
  df_2014 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2014-StatesLevel.csv')
  df_2013 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2013-StatesLevel.csv')
  df.data <- df_2013
+=======
+df_2014 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2014-StatesLevel.csv')
+df_2013 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2013-StatesLevel.csv')
+df.data <- df_2013
+>>>>>>> group the test(ing) folder together
 
 server <- function(input, output) {
   #render the whole map
@@ -150,6 +156,7 @@ server <- function(input, output) {
       )
   })
   
+<<<<<<< HEAD
   #render summary page
   output$Summary <- renderTable({
     if(input$summary_year == 2014) {
@@ -173,3 +180,9 @@ server <- function(input, output) {
     data.frame(tmp, check.names = FALSE)
   })
 }
+=======
+  
+}
+
+
+>>>>>>> group the test(ing) folder together
