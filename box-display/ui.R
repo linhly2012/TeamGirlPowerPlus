@@ -30,8 +30,8 @@ dashboardPage(skin = "purple",
           fluidRow(
             box(width = 5,
                 selectInput(inputId = "table_state", 
-                            label = "State: ", 
-                            choices = c("All", df$State %>% as.list()),
+                            label = "State: ",
+                            choices = c("All", df.data$State %>% as.list()),
                             selected = "All"
                 ),
 
