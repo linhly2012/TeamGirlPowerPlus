@@ -143,7 +143,8 @@ server <- function(input, output) {
                                    y_label, ": ", y_var, 
                                    "<br />", x_label, ": ", x_var,
                                    "<br />")) %>%
-      layout(xaxis = list(title = x_label),
+      layout(xaxis = list(title = paste0(x_label,"<br />", "(Percentage of Students)")),
+             margin = list(b = 50),
              yaxis = list(title = y_label, zeroline = TRUE)
       )
   })

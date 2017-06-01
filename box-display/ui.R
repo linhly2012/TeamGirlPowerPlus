@@ -3,12 +3,12 @@ library(plotly)
 #this return a list of html tags we can use for ui.R 
 #names(tags)
 dashboardPage(skin = "purple",
-              dashboardHeader(title = "CRER"),
+              dashboardHeader(title = "CR&ER"),
               #this method use to display the icon, and names of the tab menu  
               dashboardSidebar(
                 sidebarMenu(
                   menuItem("Summary", tabName = "Summary", icon = icon("star")),
-                  menuItem("Maps & Graph", tabName = "maps", icon = icon("map")),
+                  menuItem("Data Visualization", tabName = "maps", icon = icon("map")),
                   menuItem("Table", tabName = "tables", icon = icon("table")),
                   menuItem("About", tabName = "about", icon = icon("info"))
                 )
@@ -20,8 +20,8 @@ dashboardPage(skin = "purple",
                   tabItem(tabName = "Summary",
                           box(width=12,
                             tags$b(tags$p(style = "font-size: 25px;", 
-                            "Welcome! CRER- where we focus on finding the association between 
-                            Crime Rates and Education Rates across United States."
+                            "Welcome to CR&ER! Where we focus on finding the association between 
+                            Crime Rates & Education Rates across United States."
                             ), align="center")
                           ),
                           fluidRow(
@@ -68,13 +68,13 @@ dashboardPage(skin = "purple",
                           ),
                           fluidRow(
                             box(width = 5,
-                                title="Graduation Rate By Year (Percent)",
+                                title="Graduation Rate By Year (Measure: percent of Students)",
                                 solidHeader = TRUE, status = "primary",
                                 htmlOutput("view")
                             ),
                             box(width = 5,
                                 selectInput(inputId = "students.state.info",
-                                            label = "X Variable: ",
+                                            label = "X Variable: (Unit: percentage of students)",
                                             choices = c("Economically Disadvatanged",
                                                         "Limited English Proficiency",
                                                         "Student Disability"),
@@ -82,7 +82,10 @@ dashboardPage(skin = "purple",
                             ),
                             box(width = 5,
                                 title="Correlation Between Crime and Education",
-                                solidHeader = TRUE, status="primary", plotlyOutput("plot")
+                                solidHeader = TRUE, status="primary", plotlyOutput("plot"),
+                                helpText("Note: The unit is crime rate for type of crime, 
+                                         because through the source, they used specific type 
+                                         of algorithm to find the value. ")
                             )
                           )
                   ),
