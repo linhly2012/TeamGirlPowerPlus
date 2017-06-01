@@ -9,16 +9,17 @@ library(shiny)
 library(dplyr)
 library(googleVis)
 library(ggplot2)
-
+library(magrittr)
+library(plotly)
+library(knitr)
 # setwd("C:/Users/zacht/Documents/info-201/final-project/TeamGirlPowerPlusOne/box-display")
-df_2014 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2014-StatesLevel.csv')
-df_2013 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2013-StatesLevel.csv')
+#df_2014 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2014-StatesLevel.csv')
+#df_2013 <- read.csv('../States.Level.Data/Crime.And.Education.Rate.2013-StatesLevel.csv')
 df.data <- df_2013
 
 server <- function(input, output) {
   #render the whole map
   output$view <- renderGvis({
-    
     if(input$year == 2014) {
       df.data <- df_2014
     } 
@@ -29,14 +30,14 @@ server <- function(input, output) {
     df.data <- data.frame(df.data[2], df.data[4:15])
     #rename
     df.data <- plyr::rename(df.data, c("Violent.Crime.rate" = "Violent Crime Rate", 
-                             "Murder.and.nonnegligent.manslaughter.rate" = "Murder & Nonnegligent Manslaughter Rate",
-                             "Legacy.rape.rate..1" = "Legacy Rape Rate",
-                             "Revised.rape.rate..2" = "Revised Rape Rate",
-                             "Robbery.rate" = "Robbery Rate",
-                             "Aggravated.assault.rate" = "Aggravated Assault Rate",
-                             "Economically.disadvantaged" = "Economically Disadvantaged",
-                             "Limited.English.proficiency" = "Limited English Proficiency",
-                             "Students.with.disabilities" = "Students With Disabilities"))
+                                       "Murder.and.nonnegligent.manslaughter.rate" = "Murder & Nonnegligent Manslaughter Rate",
+                                       "Legacy.rape.rate..1" = "Legacy Rape Rate",
+                                       "Revised.rape.rate..2" = "Revised Rape Rate",
+                                       "Robbery.rate" = "Robbery Rate",
+                                       "Aggravated.assault.rate" = "Aggravated Assault Rate",
+                                       "Economically.disadvantaged" = "Economically Disadvantaged",
+                                       "Limited.English.proficiency" = "Limited English Proficiency",
+                                       "Students.with.disabilities" = "Students With Disabilities"))
     
     GeoStates <- gvisGeoChart(df.data, "State", "Total",
                               "Population",
@@ -44,8 +45,8 @@ server <- function(input, output) {
                                            displayMode="regions",
                                            resolution="provinces",
                                            colors="['#4286f4']",
-                                           width= 600, 
-                                           heigh = 400))
+                                           width= 390, 
+                                           heigh = 500))
   })
   
   #render the table information
@@ -74,11 +75,78 @@ server <- function(input, output) {
     tmp <- select(tmp, State, Year, Violent.Crime.Rate, Murder...Nonnegligent.Manslaughter.Rate, Revised.Rape.Rate, 
                   Robbery.Rate, Aggravated.Assault.Rate, Total, Economically.Disadvantaged, 
                   Limited.English.Proficiency, Students.With.Disabilities) %>% 
-            mutate(Violent.Crime.Graduation.Ratio = Violent.Crime.Rate / Total)
+      mutate(Violent.Crime.Graduation.Ratio = Violent.Crime.Rate / Total)
     colnames(tmp) <- c("State", "Year", "Violent Crime Rate", "Murder/Nonegligent manslaugter Rate", "Rape Rate", "Robbery Rate", 
                        "Aggravated Assault Rate", "Graduation Rate", "Economically Disadvantaged Rate", "Limited English Proficiency Rate",
                        "Student Disability Rate", "Violent Crime/Graduation Ratio")
     data.frame(tmp, check.names = FALSE)
   })
+ 
+  #this method render a scatterplot that is support by plotly. The scatterplot 
+  #will be use to display the correlation between the information of crimes rate
+  #and education rates(including, "Economically Disadvantaged Rate", "Limited English 
+  #Proficiency Rate", "Student Disability Rate") of each state.
+  output$plot <- renderPlotly({
+    if(input$year == 2014) {
+      df.data <- df_2014
+    } 
+    else if(input$year == 2013) {
+      df.data <- df_2013
+    }
+    #clean up the df.data - remove unneccessary columns
+    df.data <- data.frame(df.data[2], df.data[4:15])
+    
+    #identify y-label and variable go on y axis and color for each crime
+    if(input$crime == "Violent Crime Rate") {
+      y_var = df.data$Violent.Crime.Rate
+      color_display = '#ff422d'
+    }
+    else if(input$crime == "Murder/Nonegligent manslaugter Rate") {
+      y_var = df.data$Murder...Nonnegligent.Manslaughter.Rate
+      color_display = '#b71f4a'
+    }
+    else if(input$crime == "Rape Rate") {
+      y_var = df.data$Revised.Rape.Rate
+      color_display = '#7e5591'
+    }
+    else if(input$crime == "Robbery Rate") {
+      y_var = df.data$Revised.Rape.Rate  
+      color_display = '#5b6166'
+    }
+    else if(input$crime == "Aggravated Assault Rate") {
+      y_var = df.data$Aggravated.Assault.Rate
+      color_display = '#b20a01'
+    }
+    y_label = input$crime
+    
+    #identify x-label and variable go on x axis
+    if(input$students.state.info == "Economically Disadvatanged") {
+      x_var = df.data$Economically.Disadvantaged
+    }
+    else if(input$students.state.info == "Limited English Proficiency") {
+      x_var = df.data$Limited.English.Proficiency
+    }
+    else if(input$students.state.info ==  "Student Disability") {
+      x_var = df.data$Students.With.Disabilities
+    }
+    #update the x-label for the graph
+    x_label= input$students.state.info
+    
+    plot <- plot_ly(df.data,
+                    x = ~x_var,
+                    y = ~y_var,
+                    type = 'scatter',
+                    mode = 'markers',
+                    marker = list(size = 10, color = ~color_display,
+                                  line = list(color = '#bae8ff', width = 1)),
+                    text = ~paste0("Location: ", df.data$State, "<br />",
+                                   "Population: ", df.data$Population, "<br />",
+                                   y_label, ": ", y_var, 
+                                   "<br />", x_label, ": ", x_var,
+                                   "<br />")) %>%
+      layout(title = paste0("<b>",'Crime Rate Studies',"</b>"),
+             xaxis = list(title = 'Economically Disadvatanged'),
+             yaxis = list(title = y_label, zeroline = TRUE)
+      )
+  })
 }
-
