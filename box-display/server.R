@@ -79,6 +79,7 @@ server <- function(input, output) {
                        "Aggravated Assault Rate", "Graduation Rate", "Economically Disadvantaged Rate", "Limited English Proficiency Rate",
                        "Student Disability Rate", "Violent Crime/Graduation Ratio")
     data.frame(tmp, check.names = FALSE)
-  })
+  },
+  digits = 1)
 }
 
