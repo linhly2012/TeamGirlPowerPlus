@@ -18,6 +18,8 @@ dashboardPage(skin = "purple",
     tabItems(
       tabItem(tabName = "maps",
         h2("Data Visualization"),
+        p("This is a map visualization of the crime rate for each state.
+            Please hover over each data point for more information."),
         fluidRow(
           box(width = 5,
           selectInput(inputId = "year",
@@ -25,6 +27,9 @@ dashboardPage(skin = "purple",
               choices = c("2013", "2014"),
               selected = "2013")
           ),
+          p("This is a scatterplot that shows the trends/correlations between the rate of economically disadvantaged
+            students in each state compared to a specific type of crime rate. This is aggregated by state level. 
+            Please hover over each data point for more information."),
           box(width = 5,
           selectInput(inputId = "crime",
               label = "Y Variable: ",
