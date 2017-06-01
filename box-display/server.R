@@ -55,35 +55,29 @@ server <- function(input, output) {
     #value of interest
     #check.names = remove the dot between column names since 
     #there is white space in between words
-    if(input$table_state == 'All'){
-      data.frame(df.data, check.names=FALSE)      
+    if(input$table_year == 2013) {
+      tmp <- df_2013
     }
-    else {
-      if(input$table_year == 2013) {
-        tmp <- df_2013 %>% filter(State == input$table_state)
-      }
-      else if(input$table_year == 2014) {
-        tmp <- df_2014 %>% filter(State == input$table_state)
-      }
-      else if(input$table_year == 'Both') {
-        tmp <- rbind(x=df_2013 %>% filter(State == input$table_state),
-                     y=df_2014 %>% filter(State == input$table_state))
-      }
-      #clean up the df.data - remove unneccessary columns
-      tmp <- data.frame(tmp[2], tmp[4:15])
-      #rename
-      tmp <- plyr::rename(tmp, c("Violent.Crime.rate" = "Violent Crime Rate", 
-                               "Murder.and.nonnegligent.manslaughter.rate" = "Murder & Nonnegligent Manslaughter Rate",
-                               "Legacy.rape.rate..1" = "Legacy Rape Rate",
-                               "Revised.rape.rate..2" = "Revised Rape Rate",
-                               "Robbery.rate" = "Robbery Rate",
-                               "Aggravated.assault.rate" = "Aggravated Assault Rate",
-                               "Economically.disadvantaged" = "Economically Disadvantaged",
-                               "Limited.English.proficiency" = "Limited English Proficiency",
-                               "Students.with.disabilities" = "Students With Disabilities"))
-      data.frame(tmp, check.names = FALSE)
+    else if(input$table_year == 2014) {
+      tmp <- df_2014
     }
-
+    else if(input$table_year == 'Both') {
+      tmp <- rbind(x=df_2013,
+                   y=df_2014)
+    }
+    if(input$table_state != 'All') {
+      tmp <- filter(tmp, State == input$table_state)
+    }
+    #clean up the df.data - remove unneccessary columns
+    tmp <- data.frame(tmp[2], tmp[4:15])
+    #rename
+    tmp <- select(tmp, State, Violent.Crime.Rate, Murder...Nonnegligent.Manslaughter.Rate, Revised.Rape.Rate, 
+                  Robbery.Rate, Aggravated.Assault.Rate, Total, Economically.Disadvantaged, 
+                  Limited.English.Proficiency, Students.With.Disabilities)
+    colnames(tmp) <- c("State", "Violent Crime Rate", "Murder/Nonegligent manslaugter Rate", "Rape Rate", "Robbery Rate", 
+                       "Aggravated Assault Rate", "Total", "Economically Disadvantaged Rate", "Limited English Proficiency Rate",
+                       "Student Disability Rate")
+    data.frame(tmp, check.names = FALSE)
   })
 }
 

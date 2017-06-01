@@ -36,19 +36,16 @@ dashboardPage(skin = "purple",
                 ),
 
                 # Only show this panel a state is select
-                conditionalPanel(
-                  condition = "input.table_state != 'All'",
-                  selectInput(inputId = "table_year",
-                              label = "Year: ",
-                              choices = c("Both", "2013", "2014"),
-                              selected = "2013"
-                  )
+                selectInput(inputId = "table_year",
+                            label = "Year: ",
+                            choices = c("Both", "2013", "2014"),
+                            selected = "2013"
                 )
               ),
             
             box(
               width=12,
-              title="Correlation between Crime & HS Graduation in 2014",
+              title="Correlation Between Crime & HS Graduation",
               solidHeader = TRUE,
               status = "primary",
               div(style = 'overflow-x: scroll', tableOutput("table"))
