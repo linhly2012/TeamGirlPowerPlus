@@ -102,22 +102,25 @@ dashboardPage(skin = "purple",
                           box(width = 8,
                               h2("About This Project"),
                               p(
-                                "For this project, we are trying to find the correlation between crimes and education 
-                                rates in each state. As it is almost part of the American culture, moving from states 
-                                to states, for different living purpose become something that happen to almost every 
-                                citizens. When moving, we always try to find out, 'if the location is a good place', or
-                                how's the schooling here for people who has kids."
+                                "For this project, we are looking for a correlation between crimes and education 
+                                rates in each state. Nearly everyone will move to a new state or at least travel
+                                in their lifetime which make this information relevant to nearly every American 
+                                citizen in addition to foreign visitors. How safe a state is as well as the quality
+                                of education one can find there are essential factors in determing where one may move."
                               ),
                               br(),
                               p(
-                                "With the web application, user will get to see the most recent information about the 
-                                graduation (2013, 2014) year of graduation rate and crimes rate of each categories for
-                                each state. Through graph, user will able to see the relationship of each data points 
-                                for those states"
+                                "With this web application, a user will be able to see the most recent information about 
+                                education and and violent crime rate for every state and make the appropriate comparisons
+                                with the helpful and intuitive interactive features. One can see a brief overview of the
+                                best and worst areas on the summary page, On the map page one can see how certain education
+                                factors relate to violent crime as well as a geographical representation that gives information
+                                about each state. If a user wants to view all of the inoframtion available they can checkout
+                                the Table tab that can be organized by state and year."
                               ),
                               tags$footer(
                                 p(
-                                  "Credits: Zach Thomas, SoHyun Jang, Christie Gan, Linh Ly")
+                                  "Credits: Zachary Thomas, SoHyun Jang, Christie Gan, Linh Ly")
                               )
                               )
                           )
