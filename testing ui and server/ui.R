@@ -18,7 +18,7 @@ names(CAER2014)[13:15] <- c("Economically disadvantaged", "Limited English Profi
 # Create a shinyUI with a fluidPage layout
 shinyUI(fluidPage(
   
-  titlePanel("Areas of Crime and Its Correlation to the Student Demographic"),
+  titlePanel("Correlations of Crime and Education in US"),
   
   sidebarLayout(
     
