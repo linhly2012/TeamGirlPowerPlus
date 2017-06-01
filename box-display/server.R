@@ -79,7 +79,29 @@ server <- function(input, output) {
                        "Aggravated Assault Rate", "Graduation Rate", "Economically Disadvantaged Rate", "Limited English Proficiency Rate",
                        "Student Disability Rate", "Violent Crime/Graduation Ratio")
     data.frame(tmp, check.names = FALSE)
-  },
-  digits = 1)
+  })
+  
+  #render summary page
+  output$Summary <- renderTable( {
+    if(input$summary_year == 2014) {
+      tmp <- df_2014
+    } else if(input$summary_year == 2013) {
+      tmp <- df_2013
+    }
+    tmp <- df_2013 %>% select(2, 4:7, 9:15)
+    high.grad <- tmp %>% filter(Total == max(Total))
+    low.crime <- tmp %>% filter(Violent.Crime.Rate == min(Violent.Crime.Rate))
+    high.crime <- tmp %>% filter(Violent.Crime.Rate == max(Violent.Crime.Rate))
+    low.grad <- tmp %>% filter(Total == min(Total))
+    high.crime.state <- tmp %>% filter(State != "District of Columbia") %>% filter(Violent.Crime.Rate == max(Violent.Crime.Rate))
+    low.grad.state <- tmp %>% filter(State != "District of Columbia") %>% filter(Total == min(Total))
+    tmp <- rbind(high.grad, low.grad, low.grad.state, low.crime, high.crime, high.crime.state)
+    tmp <- cbind(Status = c("Highest Graduation Rate", "Lowest Graduation Rate", "lowest Graduation Rate (State)",
+                            "Lowest Crime Rate", "Highest Crime Rate", "Highest Crime Rate (State)"), tmp)
+    colnames(tmp) <- c("Status", "State", "Year", "Population", "Violent Crime Rate", "Murder/Nonnegligent Manslaughter Rate",
+                       "Rape Rate", "Robbery Rate", "Aggravated Assault Rate", "Graduation Rate",
+                       "Economically Disadvantaged Rate", "Limited English Proficiency Rate", "Student Disability Rate")
+    data.frame(tmp, check.names = FALSE)
+  })
 }
 
