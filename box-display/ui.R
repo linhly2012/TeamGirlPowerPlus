@@ -3,12 +3,12 @@ library(plotly)
 #this return a list of html tags we can use for ui.R 
 #names(tags)
 dashboardPage(skin = "purple",
-              dashboardHeader(title = "Welcome!"),
+              dashboardHeader(title = "CRER"),
               #this method use to display the icon, and names of the tab menu  
               dashboardSidebar(
                 sidebarMenu(
                   menuItem("Summary", tabName = "Summary", icon = icon("star")),
-                  menuItem("Maps", tabName = "maps", icon = icon("map")),
+                  menuItem("Maps & Graph", tabName = "maps", icon = icon("map")),
                   menuItem("Table", tabName = "tables", icon = icon("table")),
                   menuItem("About", tabName = "about", icon = icon("info"))
                 )
@@ -18,10 +18,16 @@ dashboardPage(skin = "purple",
                 #This tab will show a summary of the most siginifcant data points
                 tabItems(
                   tabItem(tabName = "Summary",
+                          box(width=12,
+                            tags$b(tags$p(style = "font-size: 25px;", 
+                            "Welcome! CRER- where we focus on finding the association between 
+                            Crime Rates and Education Rates across United States."
+                            ), align="center")
+                          ),
                           fluidRow(
                             box(width = 5,
                                 selectInput(inputId = "summary_year",
-                                            label = "year: ",
+                                            label = "Year: ",
                                             choices = c("2013", "2014"),
                                             selected = "2013")
                             ),
@@ -34,7 +40,15 @@ dashboardPage(skin = "purple",
                           )
                       ),
                   tabItem(tabName = "maps",
-                          h2("Data Visualization"),
+                          tags$b(h2("Data Visualization", align="center")),
+                          box(width=10,
+                              p(
+                                "On this page, you will able to see the total of students graduated
+                                from high school in each states (measure in percent). Along with a 
+                                graph for comparison - each crimes versus information related to 
+                                high school graduates. "
+                              ), align="center"
+                          ),
                           fluidRow(
                             box(width = 5,
                                 selectInput(inputId = "year",
@@ -67,6 +81,7 @@ dashboardPage(skin = "purple",
                                             selected = "Economically Disadvatange")
                             ),
                             box(width = 5,
+                                title="Correlation Between Crime and Education",
                                 solidHeader = TRUE, status="primary", plotlyOutput("plot")
                             )
                           )
@@ -119,9 +134,9 @@ dashboardPage(skin = "purple",
                                 the Table tab that can be organized by state and year."
                               ),
                               tags$footer(
-                                p(
+                                tags$p(style = "font-size: 20px;",
                                   "Credits: Zachary Thomas, SoHyun Jang, Christie Gan, Linh Ly")
-                              )
+                                ), align="center"
                               )
                           )
                 )
