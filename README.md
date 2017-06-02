@@ -21,7 +21,7 @@ With the web application, user will get to see the most recent information about
 Most of our code to build this application is in the box-display folder.
 
 #### Result: 
-Our shiny.io app is published on https://linhly.shinyapps.io/box-display/ .
+Our web application is published on https://linhly.shinyapps.io/box-display/ .
 
 ##### Credits: 
 Zach Thomas, SoHyun Jang, Christie Gan, Linh Ly
