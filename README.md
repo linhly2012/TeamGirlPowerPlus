@@ -4,8 +4,8 @@ This repository will be use to display the final result of the final project for
 ## Source(s) was use to support the our web application.
 
 1. [Shiny app]("shinyapps.io")
-2. [Shiny dashboard]("https://rstudio.github.io/shinydashboard/get_started.html")
-3. [Customize your UI with HTML]("https://shiny.rstudio.com/articles/html-tags.html"), supported by: Shiny
+2. [Shiny dashboard](https://rstudio.github.io/shinydashboard/get_started.html)
+3. [Customize your UI with HTML](https://shiny.rstudio.com/articles/html-tags.html), supported by: Shiny
 4. [Plotly]("https://plot.ly/r/line-and-scatter/")
 5. [GoogleVis-gvisGeoChart]("https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html")
 --[Docummentation for 5]("https://www.rdocumentation.org/packages/googleVis/versions/0.6.0/topics/gvisGeoChart")
