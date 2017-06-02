@@ -7,8 +7,12 @@ For this project, we are trying to find the correlation between crimes and educa
 
 With the web application, user will get to see the most recent information about the graduation (2013, 2014) year of graduation rate and crimes rate of each categories for each state. Through our graph, the user will able to see the relationship of each data point for those states. The types of visualization we chose to use are a map and scatterplot. The map allows the user to easily compare the crime rate between states in general, and the scatterplot allows the user to compare the type of crime with the educational status of students. We have also included tables for users who may prefer seeing more detailed information in number form.
 
+<<<<<<< HEAD
 Most of our code to build this application is in the box-display folder.
 
 Our shiny.io app is published on https://christiegan.shinyapps.io/box-display/.
+=======
+Our shiny.io app is published on https://linhly.shinyapps.io/box-display/ .
+>>>>>>> add link to readme.md
 
 Credits: Zach Thomas, SoHyun Jang, Christie Gan, Linh Ly
