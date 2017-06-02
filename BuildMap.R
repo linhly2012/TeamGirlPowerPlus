@@ -1,6 +1,5 @@
 library("plotly")
 crime.dataset <- read.csv("States Level Data/Crime And Education Rate2014-StatesLevel.csv", stringsAsFactors = FALSE)
-#View(crime.dataset)
 
 BuildMap <- function(crime.dataset, crime) {
   # give state boundaries a white border

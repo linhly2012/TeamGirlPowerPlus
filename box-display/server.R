@@ -1,7 +1,3 @@
-#shiny dashboard 
-#https://rstudio.github.io/shinydashboard/get_started.html
-#condition Panel 
-#https://shiny.rstudio.com/reference/shiny/latest/conditionalPanel.html
 #install.packages('shinydashboard')
 
 library(shinydashboard)
