@@ -24,6 +24,14 @@ dashboardPage(skin = "purple",
                             Crime Rates & Education Rates across United States."
                             ), align="center")
                           ),
+                          p(
+                            "We were curious about how the crime rate affects student's education, and how education rates
+                            affect crime rate. The two issues can stem from either one, and they both can influence each other.
+                            As it turns out, once we aggregated and made visualizations, there's insn't a very clear 
+                            correlation between the two. So, we conclude that there are a lot more other factors that determine 
+                            the crime rate and graduation rate. However, it is interesting to see the comparisons of rates
+                            between the states, and between each type of student."
+                          ), 
                           fluidRow(
                             box(width = 5,
                                 selectInput(inputId = "summary_year",
@@ -47,7 +55,8 @@ dashboardPage(skin = "purple",
                                 from high school in each states (measure in percent). Along with a 
                                 graph for comparison - each crimes versus information related to 
                                 high school graduates. "
-                              ), align="center"
+                              ), 
+                              align="center"
                           ),
                           fluidRow(
                             box(width = 5,
@@ -123,17 +132,17 @@ dashboardPage(skin = "purple",
                                 "For this project, we are looking for a correlation between crimes and education 
                                 rates in each state. Nearly everyone will move to a new state or at least travel
                                 in their lifetime which make this information relevant to nearly every American 
-                                citizen in addition to foreign visitors. How safe a state is as well as the quality
-                                of education one can find there are essential factors in determing where one may move."
+                                citizen in addition to foreign visitors. How safe a state is and the quality
+                                of education one can find in a state are essential factors in determing where one may move."
                               ),
                               br(),
                               p(
                                 "With this web application, a user will be able to see the most recent information about 
                                 education and and violent crime rate for every state and make the appropriate comparisons
                                 with the helpful and intuitive interactive features. One can see a brief overview of the
-                                best and worst areas on the summary page, On the map page one can see how certain education
+                                best and worst areas on the summary page. On the map page one can see how certain education
                                 factors relate to violent crime as well as a geographical representation that gives information
-                                about each state. If a user wants to view all of the inoframtion available they can checkout
+                                about each state. If a user wants to view all of the information available, they can check out
                                 the Table tab that can be organized by state and year."
                               ),
                               tags$footer(
