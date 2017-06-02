@@ -118,21 +118,8 @@ server <- function(input, output) {
     }
     y_label = input$crime
     
-    #identify x-label and variable go on x axis
-    if(input$students.state.info == "Economically Disadvatanged") {
-      x_var = df.data$Economically.Disadvantaged
-    }
-    else if(input$students.state.info == "Limited English Proficiency") {
-      x_var = df.data$Limited.English.Proficiency
-    }
-    else if(input$students.state.info ==  "Student Disability") {
-      x_var = df.data$Students.With.Disabilities
-    }
-    #update the x-label for the graph
-    x_label= input$students.state.info
-    
     plot <- plot_ly(df.data,
-                    x = ~x_var,
+                    x = ~df.data$Economically.Disadvantaged,
                     y = ~y_var,
                     type = 'scatter',
                     mode = 'markers',
@@ -141,9 +128,11 @@ server <- function(input, output) {
                     text = ~paste0("Location: ", df.data$State, "<br />",
                                    "Population: ", df.data$Population, "<br />",
                                    y_label, ": ", y_var, 
-                                   "<br />", x_label, ": ", x_var,
+                                   "<br />", "Economically Disadvatanged", ": ", 
+                                   df.data$Economically.Disadvantaged,
                                    "<br />")) %>%
-      layout(xaxis = list(title = paste0(x_label,"<br />", "(Percentage of Students)")),
+      layout(xaxis = list(title = paste0("Economically Disadvatanged",
+                                         "<br />", "(Percentage of Students)")),
              margin = list(b = 50),
              yaxis = list(title = y_label, zeroline = TRUE)
       )

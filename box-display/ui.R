@@ -45,6 +45,9 @@ dashboardPage(skin = "purple",
                                 status = "primary",
                                 div(style = 'overflow-x: scroll', tableOutput("Summary"))
                             )
+                          ),
+                          helpText(
+                            tags$i("Source: Bureau of Justice Statistics")
                           )
                       ),
                   tabItem(tabName = "maps",
@@ -82,19 +85,18 @@ dashboardPage(skin = "purple",
                                 htmlOutput("view")
                             ),
                             box(width = 5,
-                                selectInput(inputId = "students.state.info",
-                                            label = "X Variable: (Unit: percentage of students)",
-                                            choices = c("Economically Disadvatanged",
-                                                        "Limited English Proficiency",
-                                                        "Student Disability"),
-                                            selected = "Economically Disadvatange")
-                            ),
-                            box(width = 5,
                                 title="Correlation Between Crime and Education",
                                 solidHeader = TRUE, status="primary", plotlyOutput("plot"),
+                                helpText(
+                                  tags$i("Source: Public high school 4-year adjusted cohort graduation rate (ACGR)")
+                                ),
+                                br(),
                                 helpText("Note: The unit is crime rate for type of crime, 
                                          because through the source, they used specific type 
-                                         of algorithm to find the value. ")
+                                         of algorithm to find the value. "),
+                                helpText("Each point represent the percentage of high school students 
+                                         who graduate with Economically Disadvantage (x-axis) in each
+                                          state vs. different type of crime rates.(y-axis)")
                             )
                           )
                   ),
@@ -128,7 +130,7 @@ dashboardPage(skin = "purple",
                   tabItem(tabName = "about",
                           box(width = 8,
                               h2("About This Project"),
-                              p(
+                              tags$p(
                                 "For this project, we are looking for a correlation between crimes and education 
                                 rates in each state. Nearly everyone will move to a new state or at least travel
                                 in their lifetime which make this information relevant to nearly every American 
@@ -136,7 +138,7 @@ dashboardPage(skin = "purple",
                                 of education one can find in a state are essential factors in determing where one may move."
                               ),
                               br(),
-                              p(
+                              tags$p(
                                 "With this web application, a user will be able to see the most recent information about 
                                 education and and violent crime rate for every state and make the appropriate comparisons
                                 with the helpful and intuitive interactive features. One can see a brief overview of the
@@ -147,10 +149,33 @@ dashboardPage(skin = "purple",
                               ),
                               tags$footer(
                                 tags$p(style = "font-size: 20px;",
-                                  "Credits: Zachary Thomas, SoHyun Jang, Christie Gan, Linh Ly")
-                                ), align="center"
+                                       "Credits: Zachary Thomas, SoHyun Jang, Christie Gan, Linh Ly")
+                              ), align="center"
+                              ),
+                          br(), 
+                          box(width=8, 
+                              tags$b("Sources: "),
+                              br(), 
+                              br(), 
+                              tags$div("1. ",
+                                       tags$a(href = "https://nces.ed.gov/ccd/tables/ACGR_RE_and_characteristics_2013-14.asp", 
+                                              "NCES-Common Core of Data(CCD)")
+                              ),
+                              tags$div("2. ",
+                                       tags$a(href = "https://www.ucrdatatool.gov/Search/Crime/State/StatebyState.cfm?NoVariables=Y&CFID=149133250&CFTOKEN=9e4178ccfd9cae35-093A50F6-F370-F176-8A9DCD54AFB37926", 
+                                              "UCR - Uniform Crime Reporting Statistics")
+                              ),
+                              tags$div("3. ",
+                                       tags$a(href = "https://www.bjs.gov/developer/ncvs/developers.cfm", 
+                                              "BJS- Bureau of Justice Statistics")
                               )
                           )
-                )
+                        )
               )
             )
+)
+
+
+
+
+              
