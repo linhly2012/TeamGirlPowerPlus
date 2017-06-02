@@ -1,5 +1,5 @@
 # CR&ER 
-## Crime Rates And Education Rates - is there a correlation?
+##### Crime Rates And Education Rates - is there a correlation?
 By: TeamGirlPowerPlusOne
 
 This repository will be use to display the final result of the final project for info201 class.
